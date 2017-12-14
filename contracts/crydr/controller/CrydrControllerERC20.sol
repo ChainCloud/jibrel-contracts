@@ -35,6 +35,8 @@ contract CrydrControllerERC20 is PausableInterface,
     CrydrStorageERC20Interface(address(getCrydrStorageAddress())).transfer(_msgsender, _to, _value);
 
     if (isCrydrViewRegistered('erc20') == true) {
+      ///// [review]
+      ///// Is this event needed? transfer(...) above emits CrydrTransferredEvent
       CrydrViewERC20LoggableInterface(getCrydrViewAddress('erc20')).emitTransferEvent(_msgsender, _to, _value);
     }
   }
@@ -60,6 +62,9 @@ contract CrydrControllerERC20 is PausableInterface,
     // https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729
     // We decided to enforce users to set 0 before set new value
     var allowance = CrydrStorageAllowanceInterface(getCrydrStorageAddress()).getAllowance(_msgsender, _spender);
+
+    ///// [review]
+    ///// Why not put that inside the 'CrydrStorageERC20::approve' (see next line)?
     require((allowance > 0 && _value == 0) || (allowance == 0 && _value > 0));
 
     CrydrStorageERC20Interface(address(getCrydrStorageAddress())).approve(_msgsender, _spender, _value);

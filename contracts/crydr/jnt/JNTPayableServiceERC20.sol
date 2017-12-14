@@ -8,6 +8,8 @@ import '../../lifecycle/PausableInterface.sol';
 import './JNTPayableServiceERC20Interface.sol';
 
 
+///// [review] this name is misleading)) ERC20 means transfer/transferFrom functions.
+///// [review] Better rename it to something like JNTPayableServiceFees ?
 contract JNTPayableServiceERC20 is ManageableInterface,
                                    PausableInterface,
                                    JNTPayableServiceERC20Interface {

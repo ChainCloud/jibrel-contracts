@@ -80,8 +80,10 @@ contract CrydrStorageERC20 is SafeMathInterface,
     uint256 currentAllowance = getAllowance(_msgsender, _spender);
     require(currentAllowance != _value);
     if (currentAllowance > _value) {
+      ///// [review] Please use SafeMath
       decreaseAllowance(_msgsender, _spender, currentAllowance - _value);
     } else {
+      ///// [review] Please use SafeMath
       increaseAllowance(_msgsender, _spender, _value - currentAllowance);
     }
 

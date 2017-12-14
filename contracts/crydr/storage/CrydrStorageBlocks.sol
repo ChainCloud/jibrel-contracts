@@ -29,6 +29,9 @@ contract CrydrStorageBlocks is SafeMathInterface,
   /* Constructor */
 
   function CrydrStorageBlocks() public {
+
+    ///// [review] why is that needed?
+    ///// [review] the lenght is 8 bytes = 64 bits
     accountBlocks[0x0] = (0xffffffffffffffff - 1);
   }
 

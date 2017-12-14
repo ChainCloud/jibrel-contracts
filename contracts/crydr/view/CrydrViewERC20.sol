@@ -22,6 +22,7 @@ contract CrydrViewERC20 is PausableInterface,
   )
     external
     whenContractNotPaused
+    ///// [review] Why not move that to the controller/storage?
     onlyPayloadSize(2 * 32)
     returns (bool)
   {

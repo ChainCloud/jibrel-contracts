@@ -18,8 +18,8 @@ contract CrydrViewBase is CommonModifiersInterface,
 
   /* Storage */
 
-  address crydrController;
-  string crydrViewStandardName;
+  address crydrController = 0x0;
+  string crydrViewStandardName = "";
 
 
   /* Constructor */
@@ -66,6 +66,8 @@ contract CrydrViewBase is CommonModifiersInterface,
   /**
    * @dev Override method to ensure that contract properly configured before it is unpaused
    */
+
+  ///// [review] Same function is implemented in 'storage/CrydrStorageBase.sol' file
   function unpauseContract() public {
     require(isContract(crydrController) == true);
     require(getAssetIDHash() == AssetIDInterface(crydrController).getAssetIDHash());

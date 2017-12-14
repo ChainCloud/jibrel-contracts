@@ -10,8 +10,11 @@ import './CrydrViewERC20NamedInterface.sol';
 contract CrydrViewERC20Named is ManageableInterface,
                                 CrydrViewERC20NamedInterface {
 
-  /* Storage */
+  ///// [review] "Storage" is misleading. Why these are not in the Controller/Storage contract?
+  ///// [review] is that possible that one view of a controller has tokenName=='A' and
+  ///// [review] another one has tokenName=='B'???
 
+  /* Storage */
   string tokenName = '';
   string tokenSymbol = '';
   uint8 tokenDecimals = 0;

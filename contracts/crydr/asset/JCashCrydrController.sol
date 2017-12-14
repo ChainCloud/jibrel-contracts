@@ -52,6 +52,7 @@ contract JCashCrydrController is CommonModifiers,
     public
   {
     CrydrControllerERC20.transfer(_msgsender, _to, _value);
+    ///// [review] Better remove _to address and put 'getJntBeneficiary' inside of chargeJNTForService
     chargeJNTForService(_msgsender, getJntBeneficiary(), getJntPriceForTransfer());
   }
 
@@ -63,6 +64,7 @@ contract JCashCrydrController is CommonModifiers,
     public
   {
     CrydrControllerERC20.approve(_msgsender, _spender, _value);
+    ///// [review] Better remove _to address and put 'getJntBeneficiary' inside of chargeJNTForService
     chargeJNTForService(_msgsender, getJntBeneficiary(), getJntPriceForApprove());
   }
 
@@ -75,6 +77,7 @@ contract JCashCrydrController is CommonModifiers,
     public
   {
     CrydrControllerERC20.transferFrom(_msgsender, _from, _to, _value);
+    ///// [review] Better remove _to address and put 'getJntBeneficiary' inside of chargeJNTForService
     chargeJNTForService(_msgsender, getJntBeneficiary(), getJntPriceForTransferFrom());
   }
 }

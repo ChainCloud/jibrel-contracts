@@ -38,6 +38,7 @@ contract JNTPayableService is CommonModifiersInterface,
   {
     require(_jntController != address(jntController));
 
+    ///// [review] this is implemented in 'asset/JNT/JNTController.sol' file
     jntController = JNTControllerInterface(_jntController);
     JNTControllerChangedEvent(_jntController);
   }
@@ -68,6 +69,7 @@ contract JNTPayableService is CommonModifiersInterface,
 
   /* Actions */
 
+  ///// [review] Better remove _to address and use here 'getJntBeneficiary' function
   function chargeJNTForService(address _from, address _to, uint256 _value) internal whenContractNotPaused {
     require(_from != address(0x0));
     require(_to != address(0x0));
@@ -82,6 +84,11 @@ contract JNTPayableService is CommonModifiersInterface,
    * @dev Method used to withdraw collected JNT if contract itself used to store charged JNT.
    * @dev Assumed that JNT provides 'erc20' view.
    */
+
+  ///// [review] Didn't get how this should work!
+  ///// [review] No tests for this method!
+  ///// [review] This is called on behalf of manager, so it sends JNT from HIM!!! to Beneficiary
+  ///// [review] Comment above states that this method should send JNT from Beneficiary -> Manager?
   function withdrawJnt()
     external
     onlyAllowedManager('withdraw_jnt')
@@ -91,6 +98,8 @@ contract JNTPayableService is CommonModifiersInterface,
     var _crydrController = CrydrControllerBaseInterface(_jntControllerAddress);
     var _jntERC20ViewAddress = _crydrController.getCrydrViewAddress('erc20');
     var _jntERC20View = CrydrViewERC20Interface(_jntERC20ViewAddress);
+
+    ///// [review] this will move JNT from msg.sender -> jntBeneficiary
     _jntERC20View.transfer(jntBeneficiary, _jntERC20View.balanceOf(this));
   }
 
@@ -103,6 +112,7 @@ contract JNTPayableService is CommonModifiersInterface,
   function unpauseContract()
     public
     onlyContractAddress(jntController)
+    ///// [review] Why this check is needed?
     onlyValidJntBeneficiary(jntBeneficiary)
   {
     super.unpauseContract();

@@ -22,6 +22,8 @@ contract BytecodeExecutor is ManageableInterface,
 
   /* BytecodeExecutorInterface */
 
+  ///// [review] This is very dangerous feature
+  ///// [review] Consider removing it
   function executeCall(
     address _target,
     uint256 _suppliedGas,
@@ -40,6 +42,8 @@ contract BytecodeExecutor is ManageableInterface,
     CallExecutedEvent(_target, _suppliedGas, _ethValue, keccak256(_transactionBytecode));
   }
 
+  ///// [review] This is very dangerous feature
+  ///// [review] Consider removing it
   function executeDelegatecall(
     address _target,
     uint256 _suppliedGas,

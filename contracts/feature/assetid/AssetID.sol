@@ -14,7 +14,7 @@ contract AssetID is AssetIDInterface {
 
   /* Storage */
 
-  string assetID;
+  string assetID = "";
 
 
   /* Constructor */
